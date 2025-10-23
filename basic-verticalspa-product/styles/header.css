@@ -1,0 +1,45 @@
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #555;
+}
+
+/*
+.header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+*/
+
+/*
+.header div {
+  position: relative;
+  background-color: #e5f5e5;
+  padding:15px;
+  text-align:center;
+}
+*/
+
+
+.header div {
+  top: 18px;
+}
+
+.header-title {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+  display: inline-block;
+  text-align:center;
+  padding:15px;
+  background-color: #e5f5e5;
+}
+

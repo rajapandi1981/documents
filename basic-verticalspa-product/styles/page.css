@@ -1,0 +1,23 @@
+.page-title {
+  font-size: 25px;
+  border: none;
+  text-align: center;
+}
+
+.page-title-small {
+	text-transform: uppercase;
+	font-weight: 700;
+  font-size: 20px;
+  border: none;
+  color: #4da6e7;
+  text-align: left;
+}
+
+.page-content {
+  font-size: 12px;
+  border: none;
+}
+
+.page-list-tick  {
+  list-style-type: '\2713';
+}

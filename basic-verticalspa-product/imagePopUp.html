@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+
+function onLoad()
+{
+//alert('popup-onLoad');
+
+try
+{
+	var openerWindow = window.opener;
+		
+	var openerImgPath = openerWindow.document.getElementById("hidPopImgPath");
+	var divImageInPopUp = document.getElementById("divImageInPopUp");
+	
+	var imgEle = document.createElement('img'); 
+	
+	//alert(openerImgPath);
+	
+	if(openerImgPath && divImageInPopUp)
+		{
+		//alert('hi');
+		imgEle.setAttribute ("src", openerImgPath.value);
+		
+		divImageInPopUp.appendChild(imgEle);
+		
+		}
+		
+}
+catch(e)
+{
+alert("Exception: " + e);
+}
+}
+
+
+</script>
+
+</head>
+
+<body onLoad="onLoad()">
+
+<div id="divImageInPopUp">
+
+</div>
+</body>
+</html>
