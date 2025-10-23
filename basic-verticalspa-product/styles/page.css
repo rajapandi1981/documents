@@ -18,6 +18,23 @@
   border: none;
 }
 
+.page-link-center {
+  font-size: 12px;
+  border: none;
+  text-align: center;
+   margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .page-list-tick  {
   list-style-type: '\2713';
+}
+
+.page-image-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  
 }

@@ -11,9 +11,10 @@ const StaticData = {
 		, seq:1, isActive: "Y"},
 	},
 	menuList: [
-		{ id: 1, name:"Home", innerText:"Home", href:"#page1", seq:1, isActive: "Y"},
+		{ id: 1, name:"Home", innerText:"Home", href:"#title1", seq:1, isActive: "Y"},
 		{ id: 2, name:"AboutUs", innerText:"About Us", href:"#page2", seq:2, isActive: "Y"},
-		{ id: 3, name:"Services", innerText:"Services", href:"#page3", seq:3, isActive: "Y"}
+		{ id: 3, name:"Services", innerText:"Services", href:"#page3", seq:3, isActive: "Y"},
+		{ id: 9, name:"ContactUs", innerText:"Contact Us", href:"#page9", seq:9, isActive: "Y"},
 		
 		]
 };
@@ -70,11 +71,46 @@ const PageList = [
 			, innerText:"WELDING TIMER CONTROLLER"
 			, class:"page-title-small"},
 			{ seq:22, id: "ulContent1", tagname: "ul",  isActive: "Y", name:"ulContent1"
-			, innerText:"Rexroth timer controller PCB service, Chowel timer controller PCB service"
+			, innerText:"Rexroth timer controller PCB service , Chowel timer controller PCB service, Tucker timer controller PCB service, Obara timer controller PCB service, Also we servicing any welding controller make PCB's, Optimized Template"
 			, class:"page-list-tick"},
 			
 			]
-		}
+		},
+		{ id: "page9", name:"ContactUs", seq:3,
+			elements : [
+			{ seq:10, id: "title1", tagname: "div",  isActive: "Y", name:"Title"
+			, innerText:"Contact Us"
+			, class:"page-title-small"},
+			{ seq:11, id: "title2", tagname: "h2",  isActive: "Y", name:"Title"
+			, innerText:"Get In Touch With Us Now"
+			, class:"page-title"},
+			{ seq:20, id: "map", tagname: "iframe",  isActive: "Y", name:"Title"
+			, src:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.049172797469!2d80.17663203600787!3d13.096070187283962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263523b385457%3A0x2bfaa0f994ec5aed!2sAMEN%20INDUSTRIAL%20SOLUTIONS!5e0!3m2!1sen!2sin!4v1761239234610!5m2!1sen!2sin"
+			, class:"page-content", loading:"lazy", style: "width: 100%;"},
+			
+			{ seq:30, id: "imgContent1", tagname: "img",  isActive: "Y", name:"imgContent1"
+			, src:"images/page9/phone-icon.png"
+			, class:"page-image-center"},
+			{ seq:31, id: "link1", tagname: "a",  isActive: "Y", name:"link1"
+			, innerText:"+91 90030 xxxxx", href:"tel:+91 90030 xxxx"
+			, class:"page-link-center"},
+			
+			{ seq:50, id: "imgContent3", tagname: "img",  isActive: "Y", name:"imgContent1"
+			, src:"images/page9/location-icon.png"
+			, class:"page-image-center"},
+			{ seq:51, id: "link2", tagname: "a",  isActive: "Y", name:"link2"
+			, innerText:"SAMPLE INDUSTRIAL SOLUTIONS", href:"https://maps.app.goo.gl/zZrpXTnW6az3ZQnK8"
+			, class:"page-link-center"},
+			
+			{ seq:70, id: "textContent1", tagname: "p",  isActive: "Y", name:"textContent1"
+			, innerText:"Area we serve"
+			, class:"page-title-small"},
+			{ seq:71, id: "ulContent1", tagname: "ul",  isActive: "Y", name:"ulContent1"
+			, innerText:"CHENNAI , SRIPERUMBUDUR, CHENGALPATTU, THIRUVALLUR, KANCHEEPURAM"
+			, class:"page-list-tick"},
+			
+			]
+		},
 		
 		];
 	
