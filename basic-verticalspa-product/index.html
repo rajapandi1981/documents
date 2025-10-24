@@ -3,13 +3,15 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="scripts/htmtrenderhelper.js"></script>
-
+<script type="text/javascript" src="scripts/slideshow.js"></script>
 <script type="text/javascript" src="scripts/staticdata.js"></script>
 <script type="text/javascript" src="scripts/jquery-3.5.1.js"></script>
+
 <link rel="stylesheet" href="styles/header.css">
 <link rel="stylesheet" href="styles/menu.css">
 <link rel="stylesheet" href="styles/page.css">
-
+<link rel="stylesheet" href="styles/animation.css">
+<link rel="stylesheet" href="styles/slideshow.css">
 
 <script>
 
@@ -18,6 +20,10 @@ function onLoad()
 setHeaderData();
 setMenuData();
 setPageData();
+showSlides(1);
+
+setInterval(playSlides, 5000);
+
 }
 
 function setHeaderData() {
@@ -157,70 +163,42 @@ try
   
 }
 
-/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-function openNav() {
-  //document.getElementById("mySidebar").style.width = "250px";
-  //document.getElementById("main").style.marginLeft = "250px";
-}
 
-/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  //document.getElementById("mySidebar").style.width = "0";
-  //document.getElementById("main").style.marginLeft = "0";
-}
+function openMenu(pageId, sectionId) {
 
-function loadContent(menuNo)
-{
 try
 {
-	var main = document.getElementById("main");
-	var content = document.getElementById("content" + menuNo.toString());
+ 
+  //alert('setPageData');
+  //alert(StaticData);
+  
+  var divPage = document.getElementById(pageId);
+ 
+//alert(PageList);
+  //alert(JSON.stringify(PageList));
+  
+  var existingAttrValue = divPage.getAttribute('class');
+  divPage.setAttribute ("class", "");
+  
+  setTimeout(function() {
+        console.log("This message appears after 1 seconds.");
+    }, 1000); // 1000 milliseconds = 1 seconds
 	
-	//main.innerHTML = content.innerHTML.replace("$#$",menuNo.toString()); // this replaces only 1 occurance
-	main.innerHTML = content.innerHTML;
-	
-	//loadDynamicContent(menuNo);
-	}
+	window.location.hash = sectionId;	
+  divPage.setAttribute ("class", existingAttrValue);
+
+  }
 	catch(e)
 	{
-		alert("Exception: " + e);
+		alert("openMenu Exception: " + e);
+		console.log("openMenu Exception " + e);
 	}
+  
 }
 
-
-function loadDynamicContent(menuNo)
-{
-	var main = document.getElementById("main");
-	var content = document.getElementById("content" + menuNo.toString());
-	var dynamic_content = document.getElementById("dynamic_content" + menuNo.toString());
-	
-	var sdynamic_content="";
-	//main.innerHTML = content.innerHTML.replace("$#$",menuNo.toString()); // this replaces only 1 occurance
-	
-	//alert('loadDynamicContent-' + menuNo.toString());
-	//alert(dynamic_content);
-
-	if(menuNo == 120) // Products
-	{
-	//alert(120);
-	
-	//alert(JSON);
-		var mydata = data;
-		//if(mydata != "[object Object],[object Object]")
-		//mydata = JSON.parse(data);
-		
-		//alert(mydata);
-		//alert(mydata[0].name);
-		//alert(mydata.length);
-		sdynamic_content = getTable(mydata,2);
-	dynamic_content.appendChild(sdynamic_content);
-	}
-	
-	//alert(sdynamic_content);
-	//dynamic_content.innerHTML = sdynamic_content;
-	
+function playSlides() {
+  plusSlides(1);
 }
-
 
 function getTable(jsonData, cols)
 {
@@ -444,6 +422,11 @@ body {
 
 <!-- hidden fields -->
 
+<footer class="footer">
+ <span>© 2025 Sample Industrial Solutions. All rights reserved.</span></br>
+ <span>Designed by <a href="mailto:rajapandi.s@gmail.com">Rajapandi</a></span>
+    </footer>
+	
 <input id="hidPopImgPath" type="text" style="display:none"/>
 </body>
 
