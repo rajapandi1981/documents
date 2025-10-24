@@ -1,0 +1,72 @@
+
+@keyframes slideToRight {
+  0% {
+    left: -100%;  /* Start position: off-screen to the edge */
+  }
+  100% {
+    left: 0; /* End position: at the edge of its container */
+  }
+}
+
+/*
+@keyframes slideToLeft {
+  0% {
+    right: -100%;  
+  }
+  100% {
+    right: 0; 
+  }
+}
+*/
+
+@keyframes slideToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0); 
+  }
+}
+
+@keyframes slideToBottom {
+  0% {
+    top: -300px; /* Start position: off-screen to the edge */
+  }
+  100% {
+    top: 0; /* End position: at the edge of its container */
+  }
+}
+
+
+@keyframes slideToTop {
+  0% {
+    bottom: -300px; /* Start position: off-screen to the edge */
+  }
+  100% {
+    bottom: 0; /* End position: at the edge of its container */
+  }
+}
+
+.slidetoright {
+  position: relative; /* Essential for property to work */
+  animation: slideToRight 2s ease-out forwards; /* Animation properties */
+}
+
+
+.slidetoleft {
+  position: relative; /* Essential for property to work */
+  animation: slideToLeft 2s ease-out forwards; /* Animation properties */
+}
+
+.slidetobottom {
+ top: -300px; /* Start position: off-screen above */
+  position: relative; /* Essential for 'left' property to work */
+  animation: slideToBottom 2s ease-out forwards; /* Animation properties */
+}
+
+
+.slidetotop {
+ top: -300px; /* Start position: off-screen above */
+  position: relative; /* Essential for 'left' property to work */
+  animation: slideToTop 2s ease-out forwards; /* Animation properties */
+}
