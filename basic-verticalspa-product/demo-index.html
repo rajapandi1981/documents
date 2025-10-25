@@ -1,0 +1,433 @@
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="scripts/htmthelper-obf.js"></script>
+<script type="text/javascript" src="scripts/slideshow.js"></script>
+<script type="text/javascript" src="scripts/staticdata.js"></script>
+<script type="text/javascript" src="scripts/jquery-3.5.1.js"></script>
+
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/menu.css">
+<link rel="stylesheet" href="styles/page.css">
+<link rel="stylesheet" href="styles/animation.css">
+<link rel="stylesheet" href="styles/slideshow.css">
+
+<script>
+
+function onLoad()
+{
+setHeaderData();
+setMenuData();
+setPageData();
+showSlides(1);
+
+setInterval(playSlides, 5000);
+
+}
+
+function setHeaderData() {
+
+try
+{
+  //document.getElementById("mySidebar").style.width = "250px";
+  //document.getElementById("main").style.marginLeft = "250px";
+  
+  //alert('setHeaderData');
+  //alert(StaticData);
+  
+  var divHeaderLogoImage = document.getElementById("divHeaderLogoImage");
+ 
+ var divHeaderTitle = document.getElementById("divHeaderTitle");
+ 
+  var constants = GetStaticDataNode("constants");
+  
+  var headerLogoImageData = constants.headerLogoImage;
+  
+  // headerLogoImage
+  var headerLogoImage = CreateElementFromObject(headerLogoImageData);
+  divHeaderLogoImage.appendChild(headerLogoImage);
+  
+  // headerTitle
+		var headerTitle = CreateElementFromObject(constants.headerTitleText);
+  divHeaderTitle.appendChild(headerTitle);
+  }
+	catch(e)
+	{
+		alert("setHeaderData Exception: " + e);
+		console.log("setHeaderData Exception " + e);
+	}
+  
+}
+
+function setMenuData() {
+
+try
+{
+  //document.getElementById("mySidebar").style.width = "250px";
+  //document.getElementById("main").style.marginLeft = "250px";
+  
+  //alert('hi');
+  //alert(StaticData);
+  
+  var menuList = GetStaticDataNode("menuList");
+  
+  var menuListSorted = menuList.sort((a, b) => a.seq - b.seq);
+  
+  var divmenucontent = document.getElementById("menu-dropdown-content");
+  
+  const nonHtmlAttr = ["innerText", "innerHTML", "id"];
+
+  for (let menuItem of menuListSorted) {
+			if (menuItem.isActive.toUpperCase() === "Y") {
+			//alert(menuItem.toString());
+			//alert(JSON.stringify(menuItem));
+				var menuLink = document.createElement('a');
+				
+				/*
+				for (let key of Object.keys(menuItem)) {
+				//alert(key); alert(menuItem[key]);
+					if (key && menuItem[key] && menuItem.hasOwnProperty(key) && menuItem[key] !== null)
+					{
+					  console.log(`Key: ${key}, Value: ${menuItem[key]}`);
+					  //menuLink.setAttribute ("href", menuLink["href"]);
+					  menuLink.setAttribute (key, menuLink[key]);
+					  //menuLink.setAttribute (key, menuLink[key].toString());
+					  }
+					}
+					*/
+					
+					for (const key in menuItem) {
+					  console.log(`${key}: ${menuItem[key]}`);
+					  //console.log(`${key}: ${menuItem[key]}`);
+
+					  //console.log(`${key.toString()}: ${menuItem[key.toString()].toString()}`);
+						  if ( nonHtmlAttr.includes(key))
+						  {
+							switch(key) {
+							  case "innerText":
+								menuLink.innerText =  menuItem[key];
+								break;
+							  case "innerHTML":
+								menuLink.innerHTML =  menuItem[key];
+								break;
+							case "id":
+								menuLink.id =  "menuItem" + menuItem[key];
+								break;
+							  default:
+								// code block
+							}
+						  }
+						  else 
+						  {
+						  menuLink.setAttribute (key, menuItem[key]);
+						  }
+					  //menuLink.setAttribute (key.toString(), menuItem[key.toString()].toString());
+					  }
+				divmenucontent.appendChild(menuLink);
+			}
+		}
+		
+  }
+	catch(e)
+	{
+		alert("setMenuData Exception: " + e);
+		console.log("setMenuData Exception " + e);
+	}
+  
+}
+
+
+function setPageData() {
+
+try
+{
+ 
+  //alert('setPageData');
+  //alert(StaticData);
+  
+  var divPageContent = document.getElementById("divPageContent");
+ 
+//alert(PageList);
+  //alert(JSON.stringify(PageList));
+  var pageContent = CreatePagesFromObjectList(PageList);
+  divPageContent.appendChild(pageContent);
+  
+		
+  }
+	catch(e)
+	{
+		alert("setPageData Exception: " + e);
+		console.log("setPageData Exception " + e);
+	}
+  
+}
+
+
+function openMenu(pageId, sectionId) {
+
+try
+{
+ 
+  //alert('setPageData');
+  //alert(StaticData);
+  
+  var divPage = document.getElementById(pageId);
+ 
+//alert(PageList);
+  //alert(JSON.stringify(PageList));
+  
+  var existingAttrValue = divPage.getAttribute('class');
+  divPage.setAttribute ("class", "");
+  
+  setTimeout(function() {
+        console.log("This message appears after 1 seconds.");
+    }, 1000); // 1000 milliseconds = 1 seconds
+	
+	window.location.hash = sectionId;	
+  divPage.setAttribute ("class", existingAttrValue);
+
+  }
+	catch(e)
+	{
+		alert("openMenu Exception: " + e);
+		console.log("openMenu Exception " + e);
+	}
+  
+}
+
+function playSlides() {
+  plusSlides(1);
+}
+
+function getTable(jsonData, cols)
+{
+//alert('getTable');
+var table = document.createElement('table');
+var totalRecords = jsonData.length;
+
+var iRows = Math.round(totalRecords/cols);
+
+var w = window.innerWidth;
+var h = window.innerHeight;
+
+
+// leave 20% for side menu
+//var imgWidth = w * .8 / (cols*1.2) // Use this if 2 td for each product
+var imgWidth = w * .8 / (cols*1) // Use this if 1 td for each product
+
+//alert(iRows);
+
+var iCurrentRecord=0;
+
+for (var i = 1; i <= iRows; i++){
+//alert("i=" + i.toString());
+
+    var tr = document.createElement('tr');   
+
+	for(var j=1; j<=cols; j++){
+	//alert("j=" + j.toString());
+
+if(iCurrentRecord +1 > totalRecords) break; // stop if no more rows to process 
+
+		var product_td = document.createElement('td');
+		var single_product_table = document.createElement('table');
+		var single_product_tr1 = document.createElement('tr'); 
+		var single_product_td11 = document.createElement('td'); 
+		var single_product_td11_img = document.createElement('img'); 
+		var single_product_td12 = document.createElement('td'); 
+		
+		
+		//alert(jsonData[iCurrentRecord].imgpath);
+		
+		single_product_td11_img.setAttribute ("src", jsonData[iCurrentRecord].imgpath);
+		single_product_td11_img.setAttribute ("alt", jsonData[iCurrentRecord].imgalt);
+		single_product_td11_img.setAttribute ("width", imgWidth.toString() + "px");
+		single_product_td11_img.setAttribute ("onclick", "productImgClick('" + jsonData[iCurrentRecord].imgpath + "')");
+
+		
+		single_product_td11.appendChild(single_product_td11_img);
+		single_product_td12.innerText= jsonData[iCurrentRecord].name;
+		
+		
+		
+		single_product_tr1.appendChild(single_product_td11);
+		single_product_tr1.appendChild(single_product_td12);
+		
+		single_product_table.appendChild(single_product_tr1);
+		single_product_table.setAttribute ("border", 0);
+		product_td.appendChild(single_product_table);
+		
+		//alert(product_td.innerHTML);
+		tr.appendChild(product_td);
+		
+		iCurrentRecord++;
+	}
+    
+    table.appendChild(tr);
+}
+
+//alert("final html = " + table.outerHTML);
+return table;
+}
+
+
+function productImgClick(strImgPath)
+{
+///
+//alert('productImgClick');
+var hidPopImgPath  = document.getElementById("hidPopImgPath");
+hidPopImgPath.value = strImgPath;
+
+window.open("imagePopUp.html",'imgwindow','height=500,width=650');
+
+}
+</script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+.menu {
+  float:left;
+  width:20%;
+  text-align:left;
+}
+.menu a {
+  background-color:#e5f5e5;
+  padding:8px;
+  margin-top:7px;
+  display:block;
+  color:black;
+}
+
+.main {
+  float:left;
+  width:80%;
+  padding:0 20px;
+  }
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) 
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+*/
+
+
+/* For mobile phones: */
+/*
+@media only screen and (max-width:620px) {
+  .menu, .main {
+    width:100%;
+  }
+}
+
+*/
+
+</style>
+
+
+</head>
+<body onLoad="onLoad()">
+
+<!--- Home  --->
+<table class="header-fixed">
+<tr>
+	<td>
+		<div id="divHeaderLogoImage" class="header">
+		  		
+		</div>
+	</td>
+		
+		
+
+	<td>
+	  <div id="menu-dropdown" class="menu-dropdown">
+		  <div class="menu-dropbtn">
+			<div class="menu-bar1"></div>
+			<div class="menu-bar2"></div>
+			<div class="menu-bar3"></div>
+			
+		  </div>
+		   
+		  <div id="menu-dropdown-content" class="menu-dropdown-content">
+		  </div>
+		
+	</td>
+	<td>
+		<div id="divHeaderTitle" class="header-title">
+		</div>
+	</td>
+</tr>
+</table>
+
+<!--
+<div class="header">
+  <img src="images/html5logo.png" alt="logo" />
+  
+  <div id="menu-dropdown" class="menu-dropdown">
+  <div class="menu-dropbtn">
+	<div class="menu-bar1"></div>
+	<div class="menu-bar2"></div>
+	<div class="menu-bar3"></div>
+	
+  </div>
+   
+  <div id="menu-dropdown-content" class="menu-dropdown-content">
+  </div>
+</div class="header-div">
+
+
+  <h1>Sample Industrial Solutions</h1>
+
+</div>
+
+<div id="menu-dropdown" class="menu-dropdown">
+  <div class="menu-dropbtn">
+	<div class="menu-bar1"></div>
+	<div class="menu-bar2"></div>
+	<div class="menu-bar3"></div>
+	
+  </div>
+   
+  <div id="menu-dropdown-content" class="menu-dropdown-content">
+  </div>
+  
+ 
+</div>
+
+<div style="background-color:#e5f5e5;padding:15px;text-align:center;">
+  <h1>Sample Industrial Solutions</h1>
+</div>
+
+-->
+<!-- /* Adjust padding-top value to match the header's height */ -->
+<div id="divDummyContent" style="padding-top: 120px;">
+&nbsp;
+</br>
+</div>
+
+<div id="divPageContent" style="overflow:auto;">
+
+
+</div>
+
+<!--- End --->
+
+<!-- hidden fields -->
+
+<footer class="footer">
+ <span>© 2025 Sample Industrial Solutions. All rights reserved.</span></br>
+ <span>Designed by <a href="mailto:rajapandi.s@gmail.com">Rajapandi</a></span>
+    </footer>
+	
+<input id="hidPopImgPath" type="text" style="display:none"/>
+</body>
+
+</html>

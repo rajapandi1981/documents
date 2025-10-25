@@ -6,7 +6,7 @@ const StaticData = {
 	constants: {
 		appName: "My Website",
 		headerLogoImage: { tagname: "img", id: "headerLogoImage", name:"headerLogoImage"
-			, src:"images/html5logo.png", onclick:"window.location='index.html';", seq:1, isActive: "Y"},
+			, src:"images/html5logo.png", onclick:"window.location='demo-index.html';", seq:1, isActive: "Y"},
 		headerTitleText: { tagname: "h1", id: "headerTitleText", name:"headerTitleText", innerText:"Sample Industrial Solutions"
 		, seq:1, isActive: "Y"},
 	},
